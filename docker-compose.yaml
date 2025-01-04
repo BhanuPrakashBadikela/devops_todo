@@ -1,8 +1,8 @@
-version: '3.8'
+version: '3'
 services:
-  adonis-app:
-    image: bp6302676570/adonisapp-image:latest
+  todo-app:
+    build: .
     ports:
-      - "4000:3000"
+      - "3333:3333"
     environment:
-      NODE_ENV: production
+      - NODE_ENV=production

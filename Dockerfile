@@ -1,23 +1,33 @@
-# Stage 1: Install Dependencies
-FROM node:16-alpine AS dependencies
+# Build Stage
+FROM node:16 AS build
 
+# Set working directory
 WORKDIR /app
 
-COPY package.json ./
-
+# Install dependencies
+COPY package*.json ./
 RUN npm install
 
+# Copy app files
 COPY . .
 
-# Stage 2: Production
-FROM node:16-alpine
+# Build the app (if applicable)
+RUN npm install -g typescript
 
+# Production Stage
+FROM node:16-slim
+
+# Set working directory for production
 WORKDIR /app
 
-COPY --from=dependencies /app/package.json /app/package-lock.json ./
-COPY --from=dependencies /app/node_modules /app/node_modules
-COPY --from=dependencies /app /app
+# Copy the necessary files from the build stage
+COPY --from=build /app /app
 
+# Install only production dependencies
+RUN npm ci --only=production
+
+# Expose port 3000
 EXPOSE 3333
 
-CMD ["node", "server.js"] 
+# Start the app
+CMD ["npm", "start"]
