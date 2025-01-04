@@ -24,13 +24,7 @@ jobs:
         docker build -t bp6302676570/adonisapp-image:tagname .
         docker push bp6302676570/adonisapp-image:tagname
 
-    - name: Deploy using SSH
-      uses: appleboy/ssh-action@v0.1.4
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        script: |
-          cd /path/to/your/app
-          docker-compose pull
-          docker-compose up -d
+    - name: Deploy using GitHub-hosted Docker Compose
+      run: |
+        docker-compose -f /path/to/your/app/docker-compose.yml pull
+        docker-compose -f /path/to/your/app/docker-compose.yml up -d
