@@ -30,7 +30,7 @@ jobs:
         chmod +x /usr/local/bin/docker-compose
         docker-compose --version
 
-    - name: Deploy using GitHub-hosted Docker Compose
+    - name: Deploy using Docker Compose
       run: |
-        docker-compose -f /path/to/your/app/docker-compose.yml pull
-        docker-compose -f /path/to/your/app/docker-compose.yml up -d
+        docker-compose -f docker-compose.yml pull
+        docker-compose -f docker-compose.yml up -d
