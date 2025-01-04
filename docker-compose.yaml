@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  adonis-app:
+    image: bp6302676570/adonisapp-image:latest
+    ports:
+      - "4000:3000"
+    environment:
+      NODE_ENV: production
