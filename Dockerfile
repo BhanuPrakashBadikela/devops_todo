@@ -46,7 +46,7 @@ WORKDIR /app
 
 # Copy the necessary files from the build stage
 
-COPY --from=build /app nstall only production dependencies
+COPY --from=build /app /app
 
 RUN npm ci --only=production
 
