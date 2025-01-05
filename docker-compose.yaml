@@ -6,3 +6,14 @@ services:
       - "3333:3333"
     environment:
       - NODE_ENV=production
+    command: 
+      - npm
+      - start
+    volumes:
+      - ./migrations:/migrations
+    entrypoint:
+      - sh
+      - -c
+      - |
+        npm run migrate
+        npm start
