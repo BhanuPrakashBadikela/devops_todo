@@ -9,4 +9,4 @@ services:
     command: 
       - sh
       - -c
-      - "node ace migration:run && npm start"
+      - "node ace migration:run --force && npm start"
