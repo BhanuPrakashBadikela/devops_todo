@@ -6,7 +6,12 @@ services:
       - "3333:3333"
     environment:
       - NODE_ENV=production
-    command: 
-      - sh
-      - -c
-      - "node ace migration:run --force && npm start"
+    depends_on:
+      - migration-runner
+    command: ["npm", "start"]
+
+  migration-runner:
+    build: .
+    environment:
+      - NODE_ENV=development
+    entrypoint: ["node", "ace", "migration:run"]
