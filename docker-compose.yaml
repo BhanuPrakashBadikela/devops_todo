@@ -7,13 +7,6 @@ services:
     environment:
       - NODE_ENV=production
     command: 
-      - npm
-      - start
-    volumes:
-      - ./migrations:/migrations
-    entrypoint:
       - sh
       - -c
-      - |
-        npm run migrate
-        npm start
+      - "node ace migration:run && npm start"
